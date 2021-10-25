@@ -1,0 +1,27 @@
+actor Usuário
+Usuário->navegador:preenche campo
+
+Usuário->+navegador:pressiona "Save"
+
+navegador->+navegador:form.onSubmit
+navegador->+navegador:redrawNotes
+deactivate navegador
+navegador->+navegador:sendToServer
+navegador->+servidor:POST
+note over navegador,servidor
+endpoint /exampleapp/new_note_spa
+parâmetro
+{"content":"teste",
+"date":"2021-10-25T22:41:59.626Z"}
+end note
+servidor-->-navegador:resposta 201
+
+navegador->+navegador:onreadystatechange
+navegador->+navegador:console.log
+note over navegador,navegador
+{"message":"note created"}
+end note
+deactivate navegador
+deactivate navegador
+deactivate navegador
+deactivate navegador

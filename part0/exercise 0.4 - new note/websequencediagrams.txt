@@ -1,0 +1,76 @@
+
+actor Usuário
+Usuário->navegador:preenche campo
+
+Usuário->+navegador:pressiona "Save"
+
+navegador->+servidor:POST
+note over navegador,servidor
+endpoint /exampleapp/new_note
+parâmetro note:banana
+end note
+
+servidor->+servidor:adicina nota
+deactivate servidor
+servidor-->-navegador:resposta 302
+note over servidor,navegador
+recarregar página inicial
+end note
+
+navegador->+servidor:GET
+note over navegador,servidor
+endpoint /exampleapp/notes
+end note
+
+servidor-->-navegador:resposta 200
+note over navegador,servidor
+conteúdo da página /exampleapp/notes
+end note
+
+navegador->+servidor:GET
+note over navegador,servidor
+endpoint /exampleapp/main.css
+end note
+
+servidor-->-navegador:resposta 200
+note over navegador,servidor
+conteúdo do arquivo
+main.css
+end note
+
+navegador->+servidor:GET
+note over navegador,servidor
+endpoint /exampleapp/main.js
+end note
+
+servidor-->-navegador:resposta 200
+note over navegador,servidor
+conteúdo do arquivo
+main.js
+end note
+
+navegador->+navegador:xhtttp.open
+note over navegador,navegador
+endpoint /exampleapp/data.json
+end note
+
+navegador->+servidor:GET
+note over navegador,servidor
+endpoint /exampleapp/data.json
+end note
+
+servidor-->-navegador:resposta 200
+note over navegador,servidor
+conteúdo do arquivo 
+data.json
+end note
+
+navegador->+navegador: xhttp.onreadystatechange
+note over navegador,navegador
+cria uma linha para cada 
+item do arquivo JSON
+end note
+
+deactivate navegador
+deactivate navegador
+deactivate navegador

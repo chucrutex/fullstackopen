@@ -1,0 +1,57 @@
+actor Usuário
+Usuário->+navegador:informa URL
+note over Usuário,navegador
+studies.cs.helsinki.fi/exampleapp/spa
+end note
+
+navegador->+servidor:GET
+note over navegador,servidor
+endpoint /exampleapp/spa
+end note
+
+servidor-->-navegador:resposta 200
+note over navegador,servidor
+conteúdo da página /exampleapp/spa
+end note
+
+navegador->+servidor:GET
+note over navegador,servidor
+endpoint /exampleapp/main.css
+endpoint /exampleapp/spa.js
+end note
+
+servidor-->-navegador:resposta 200
+note over navegador,servidor
+conteúdo dos arquivos
+main.css e spa.js
+end note
+
+navegador->+navegador:xhttp.open, xhttp.send
+navegador->+servidor:GET
+note over navegador,servidor
+endpoint /exampleapp/data.json
+end note
+
+servidor-->-navegador:resposta 200
+note over navegador,servidor
+conteúdo do arquivo
+data.json
+end note
+
+deactivate navegador
+
+navegador->+navegador:window.onload
+note over navegador,navegador
+registra tratador
+do submit
+end note
+deactivate navegador
+
+navegador->+navegador:xhttp.onreadystatechange
+navegador->+navegador:xhttp.redrawNotes
+note over navegador,navegador
+cria uma linha para cada 
+item do arquivo JSON
+end note
+deactivate navegador
+deactivate navegador
