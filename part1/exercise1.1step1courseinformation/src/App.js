@@ -23,30 +23,39 @@ const Header = (props) => {
   return (<>      <h1>{props.course}</h1>  </>);
 }
 
+const Part = (props) => {
+
+  return (
+
+    <>
+      <p>
+        {props.nmExercise} {props.qtdExercise}
+      </p>
+    </>);
+
+}
+
 const Content = (props) => {
 
 
-  return (<>
-    <p>
-      {props.nmExercise1} {props.qtdExercise1}
-    </p>
-    <p>
-      {props.nmExercise2} {props.qtdExercise2}
-    </p>
-    <p>
-      {props.nmExercise3} {props.qtdExercise3}
-    </p>
-  </>);
+  return (
+
+    <>
+      <Part nmExercise={props.nmExercise1} qtdExercise={props.qtdExercise1}></Part>
+      <Part nmExercise={props.nmExercise2} qtdExercise={props.qtdExercise2}></Part>
+      <Part nmExercise={props.nmExercise3} qtdExercise={props.qtdExercise3}></Part>
+    </>);
+
 }
 
 const Total = (props) => {
-  return (<>
+  return (
 
-    <p>Number of exercises {props.qtdExercise1 + props.qtdExercise2 + props.qtdExercise3}</p>
+    <>
 
-  </>);
+      <p>Number of exercises {props.qtdExercise1 + props.qtdExercise2 + props.qtdExercise3}</p>
+
+    </>);
 }
-
-
 
 export default App
