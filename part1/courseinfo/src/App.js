@@ -3,74 +3,63 @@ import React from "react"
 
 const App = () => {
   const course = "Half Stack application development"
-  const part1 = {
-    name: "Fundamentals of React",
-    exercises: 10
-  }
-  const part2 = {
-    name: "Using props to pass data",
-    exercises: 7
-  }
-  const part3 = {
-    name: "State of a component",
-    exercises: 14
-  }
-
-  return (
-    <>
-      <Header course={course} />
-      <Content exercise1={part1} exercise2={part2} exercise3={part3} />
-      <Total exercise1={part1} exercise2={part2} exercise3={part3} />
-    </>
+  const parts = [{ name: "Fundamentals of React", exercises: 10 },
+  { name: "Using props to pass data", exercises: 7 },
+  { name: "State of a component", exercises: 14 }];
+  return (<>
+    <Header course={course} />
+    <Content exercises={parts} />
+    <Total exercises={parts} />
+  </>
   )
 }
 
 const Header = (props) => {
 
-  console.log(props);
+  console.log("Header [%O]", props);
 
-  return (
-    <>
-    </>);
+  return (<>
+    <h1>{props.course}</h1>
+  </>);
 
 }
 
 const Part = (props) => {
 
-  console.log(props);
+  console.log("Part [%O]", props);
 
-  return (
-    <>
-      <p>
-        {props.exercise.name} {props.exercise.exercises}
-      </p>
-    </>);
+  return (<>
+    <p>
+      {props.exercise.name} {props.exercise.exercises}
+    </p>
+  </>);
 
 }
 
 const Content = (props) => {
 
-  console.log(props);
+  console.log("Content [%O]", props);
 
-  return (
-    <>
-      <Part exercise={props.exercise1}></Part>
-      <Part exercise={props.exercise2}></Part>
-      <Part exercise={props.exercise3}></Part>
-    </>);
-
+  return (<>
+    <Part exercise={props.exercises[0]}></Part>
+    <Part exercise={props.exercises[1]}></Part>
+    <Part exercise={props.exercises[2]}></Part>
+  </>);
 }
 
 const Total = (props) => {
 
   console.log(props);
 
-  return (
-    <>
+  let total = 0;
+  props.exercises.forEach(exercise => {
+    total += exercise.exercises;
+  });
 
-      <p>Number of exercises {props.exercise1.exercises + props.exercise2.exercises + props.exercise3.exercises}</p>
 
-    </>);
+  return (<>
+    <p>Number of exercises {total}</p>
+  </>);
 }
 
 export default App
