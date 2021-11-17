@@ -1,11 +1,16 @@
 import React from "react";
 
-const Hello = (props) => {
+const Hello = ({name, age}) => {
+
+  // recupera o ano da data corrente
+  // retorna a diferença do ano corrente e a idade 
+  // para tentar adivinhar o ano de nascimento da pessoa
+  const bornYear = () => new Date().getFullYear() - age;
+
   return (
     <div>
-      <p>
-        Hello {props.name}, you are {props.age} years old
-      </p>
+      <p>Hello {name}, you are {age} years old</p>
+      <p>So you were probably born in {bornYear()}</p>
     </div>
   );
 }
