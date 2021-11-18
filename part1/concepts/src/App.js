@@ -1,29 +1,39 @@
 import React, { useState } from "react";
 
-const Display = ({ counter }) => <div>{counter}</div>;
-const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
-
 const App = () => {
+  const [clicks, setClicks] = useState({
+    left: 0, right: 0
+  });
 
-  // useState retorna um objeto com um campo numérico e uma função que recebe um número
-  // que dispara a atualização do estado
-  // além disso, o counter é inicializado com o valor passado para useState
-  const [counter, setCounter] = useState(0);
+  const handleLeftClick = () => {
 
-  const increaseByOne = () => setCounter(counter + 1);
-  const decreaseByOne = () => setCounter(counter - 1);
-  const setToZero = () => setCounter(0);
+    setClicks({
+      // isso copia as propriedades do objeto clicks para dentro de newClicks
+      // sintaxe object spread
+      ...clicks,
 
-  console.log("rendering...", counter);
+      left: clicks.left + 1
+    });
+  };
+
+  const handleRightClick = () => {
+
+    setClicks({
+      // isso copia as propriedades do objeto clicks para dentro de newClicks
+      // sintaxe object spread
+      ...clicks,
+
+      right: clicks.right + 1
+    });
+  };
 
   return (
     <div>
-      <Display counter={counter} />
-      <Button onClick={increaseByOne} text="plus" />
-      <Button onClick={decreaseByOne} text="minus" />
-      <Button onClick={setToZero} text="zero" />
-    </div>);
-
+      {clicks.left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {clicks.right}
+    </div>
+  );
 };
-
 export default App;
