@@ -1,40 +1,25 @@
-import React from "react";
-
-const Hello = ({name, age}) => {
-
-  // recupera o ano da data corrente
-  // retorna a diferença do ano corrente e a idade 
-  // para tentar adivinhar o ano de nascimento da pessoa
-  const bornYear = () => new Date().getFullYear() - age;
-
-  return (
-    <div>
-      <p>Hello {name}, you are {age} years old</p>
-      <p>So you were probably born in {bornYear()}</p>
-    </div>
-  );
-}
-
-const Footer = () => {
-  return (
-    <div>
-      greeting app created by <a href="https://github.com/mluukkai">mluukkai</a>
-    </div>
-  );
-}
+import React, { useState } from "react"
 
 const App = () => {
-  const name = "Peter"
-  const age = 10
+
+  // useState retorna um objeto com um campo numérico e uma função que recebe um número
+  // que dispara a atualização do estado
+  // além disso, o counter é inicializado com o valor passado para useState
+  const [counter, setCounter] = useState(0);
+
+  const increaseByOne = () => setCounter(counter + 1)
+  
+  const setToZero = () => setCounter(0)
+
+  console.log("rendering...", counter);
 
   return (
-    <>
-      <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} />
-      <Hello name={name} age={age} />
-      <Footer />
-    </>
-  );
-}
+    <div>
+      <div>{counter}</div>
+      <button onClick={increaseByOne}>plus</button>
+      <button onClick={setToZero}>zero</button>
+    </div>);
+
+};
 
 export default App;
