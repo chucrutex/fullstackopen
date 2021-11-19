@@ -1,5 +1,32 @@
 import React, { useState } from "react";
 
+const History = (props) => {
+
+  // o componente mostra um texto de instrução no estado inicial
+  if (props.allClicks.length === 0)
+    return (
+      <td colSpan="2">the app is used by pressing the buttons</td>
+    );
+
+  // o componente mostra um texto com os cliques que já foram dados,
+  // se não mais estiver no estado inicial
+  return (
+    <td colSpan="2">button press history: {props.allClicks.join(" ")}</td>
+  );
+
+};
+
+const Button = (props) => {
+
+  return (
+    <td>
+      <p>{props.value}</p>
+      <p><button onClick={props.onClick}>{props.text}</button></p>
+    </td>
+  );
+
+};
+
 const App = () => {
 
   // armazena estado de quando esquerda for clicado
@@ -28,11 +55,17 @@ const App = () => {
   return (
     <div>
       <table border="1">
-        <tr align="center"><td>{left}</td><td> {right}</td></tr>
-        <tr align="center"><td><button onClick={handleLeftClick}>left</button></td><td> <button onClick={handleRightClick}>right</button></td></tr>
-        <tr align="center"><td colSpan="2">{allClicks.join(" ")}</td></tr>
-      </table>
-    </div>
+        <tbody>
+        <tr align="center">
+          <Button value={left} onClick={handleLeftClick} text="left" />
+          <Button value={right} onClick={handleRightClick} text="right" />
+        </tr>
+        <tr align="center">
+          <History allClicks={allClicks} />
+        </tr>
+        </tbody>
+      </table >
+    </div >
   );
 };
 
