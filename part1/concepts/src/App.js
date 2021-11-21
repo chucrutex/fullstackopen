@@ -5,13 +5,13 @@ const History = (props) => {
   // o componente mostra um texto de instrução no estado inicial
   if (props.allClicks.length === 0)
     return (
-      <td colSpan="2">the app is used by pressing the buttons</td>
+      <td colSpan="3">the app is used by pressing the buttons</td>
     );
 
   // o componente mostra um texto com os cliques que já foram dados,
   // se não mais estiver no estado inicial
   return (
-    <td colSpan="2">button press history: {props.allClicks.join(" ")}</td>
+    <td colSpan="3">button press history: {props.allClicks.join(" ")}</td>
   );
 
 };
@@ -40,14 +40,21 @@ const App = () => {
 
   const handleLeftClick = () => {
     // guarda o array anterior com "L" ao final
-    setAll(allClicks.concat("L"))
-    setLeft(left + 1)
+    setAll(allClicks.concat("L"));
+    setLeft(left + 1);
   };
 
   const handleRightClick = () => {
     // guarda o array anterior com "R" ao final
-    setAll(allClicks.concat("R"))
-    setRight(right + 1)
+    setAll(allClicks.concat("R"));
+    setRight(right + 1);
+  };
+
+  const handleResetAll = () => {
+    // reseta ambos os lados
+    setLeft(0);
+    setRight(0);
+    setAll([]);
   };
 
 
@@ -56,13 +63,14 @@ const App = () => {
     <div>
       <table border="1">
         <tbody>
-        <tr align="center">
-          <Button value={left} onClick={handleLeftClick} text="left" />
-          <Button value={right} onClick={handleRightClick} text="right" />
-        </tr>
-        <tr align="center">
-          <History allClicks={allClicks} />
-        </tr>
+          <tr align="center">
+            <Button value={left} onClick={handleLeftClick} text="left" />
+            <Button value={right} onClick={handleRightClick} text="right" />
+            <Button value="" onClick={handleResetAll} text="reset" />
+          </tr>
+          <tr align="center">
+            <History allClicks={allClicks} />
+          </tr>
         </tbody>
       </table >
     </div >
