@@ -36,6 +36,7 @@ const Button = (props) => {
 
 };
 
+const Display = props => <div>{props.value}</div>;
 const App = () => {
 
   // armazena estado de quando esquerda for clicado
@@ -77,6 +78,7 @@ const App = () => {
   // haverá os 2 botões com seus respectivos contadores 
   return (
     <div>
+      <Display value={value} />
       <table border="1">
         <tbody>
           <tr align="center">
@@ -99,9 +101,9 @@ const App = () => {
             <MultiValue value={value} />
           </tr>
           <tr align="center">
-            <Button value="will set the value to 1000" onClick={()=>setToValue(1000)} text="thousand" />
-            <Button value="will reset the value" onClick={()=>setToValue(0)} text="reset" />
-            <Button value="will increment the value" onClick={()=>setToValue(value + 1)} text="increment" />
+            <Button value="will set the value to 1000" onClick={() => setToValue(1000)} text="thousand" />
+            <Button value="will reset the value" onClick={() => setToValue(0)} text="reset" />
+            <Button value="will increment the value" onClick={() => setToValue(value + 1)} text="increment" />
           </tr>
         </tbody>
       </table >
