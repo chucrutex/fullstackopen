@@ -14,6 +14,21 @@ const Button = (props) => {
 
 const Display = (props) => <>{props.text} {props.value}<br /></>;
 
+const Statistics = (props) => {
+
+  let all = 0, average = 0, positive = 0;
+
+  all = (props.good + props.bad + props.neutral)
+  average = all === 0 ? 0 : (props.good - props.bad) / all;
+  positive = all === 0 ? 0 : 100 * props.good / all;
+
+  return (<>
+    <Display text={TEXT_ALL} value={all} />
+    <Display text={TEXT_AVERAGE} value={average} />
+    <Display text={TEXT_POSITIVE} value={positive + " %"} />
+  </>);
+};
+
 const Title = (props) => <><h1>{props.text}</h1></>;
 
 const App = () => {
@@ -21,7 +36,6 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
-  let all = 0, average = 0, positive = 0;
 
   const handleClick = (buttonPressed, setterFunction, stateValue) => {
 
@@ -29,10 +43,6 @@ const App = () => {
     console.log("button pressed [", buttonPressed, "]");
 
   };
-
-  all = good + bad + neutral;
-  average = all === 0 ? 0 : (good - bad) / all;
-  positive = all === 0 ? 0 : 100 * good / all + " %";
 
   return (
     <div>
@@ -44,9 +54,7 @@ const App = () => {
       <Display text={TEXT_GOOD} value={good} />
       <Display text={TEXT_NEUTRAL} value={neutral} />
       <Display text={TEXT_BAD} value={bad} />
-      <Display text={TEXT_ALL} value={all} />
-      <Display text={TEXT_AVERAGE} value={average} />
-      <Display text={TEXT_POSITIVE} value={positive} />
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   );
 
