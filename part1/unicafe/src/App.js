@@ -4,13 +4,9 @@ const TEXT_GOOD = "good";
 const TEXT_NEUTRAL = "neutral";
 const TEXT_BAD = "bad";
 const SPACING = 1;
-
-const handleClick = (buttonPressed, setterFunction, stateValue) => {
-
-  setterFunction(stateValue + 1);
-  console.log("button pressed [", buttonPressed, "]");
-
-};
+const TEXT_ALL = "all";
+const TEXT_AVERAGE = "average";
+const TEXT_POSITIVE = "positive";
 
 const Button = (props) => {
   return (<><button style={{ marginRight: SPACING + "em" }} onClick={props.onClick}>{props.text}</button></>);
@@ -22,10 +18,22 @@ const Title = (props) => <><h1>{props.text}</h1></>;
 
 const App = () => {
 
-  // save clicks of each button to its own state
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  let all = 0, average = 0, positive = 0;
+
+  const handleClick = (buttonPressed, setterFunction, stateValue) => {
+
+    setterFunction(stateValue + 1);
+    console.log("button pressed [", buttonPressed, "]");
+
+  };
+
+  all = good + bad + neutral;
+  average = all === 0 ? 0 : (good - bad) / all;
+  positive = all === 0 ? 0 : 100 * good / all + " %";
+
   return (
     <div>
       <Title text="give feedback" />
@@ -36,6 +44,9 @@ const App = () => {
       <Display text={TEXT_GOOD} value={good} />
       <Display text={TEXT_NEUTRAL} value={neutral} />
       <Display text={TEXT_BAD} value={bad} />
+      <Display text={TEXT_ALL} value={all} />
+      <Display text={TEXT_AVERAGE} value={average} />
+      <Display text={TEXT_POSITIVE} value={positive} />
     </div>
   );
 
