@@ -44,6 +44,7 @@ const App = () => {
   return (
     <div>
       <p>{anecdotes[selected]}</p>
+      <p>has {votes[selected]} votes</p>
       <p><Button text="vote" handler={() => handleVote()} /> <Button text="next anecdote" handler={() => handleNextAnecdote()} /></p>
     </div>
   );
