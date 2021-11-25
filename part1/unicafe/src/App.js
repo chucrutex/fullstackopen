@@ -12,7 +12,10 @@ const Button = (props) => {
   return (<><button style={{ marginRight: SPACING + "em" }} onClick={props.onClick}>{props.text}</button></>);
 };
 
-const StatisticsLine = (props) => <>{props.text} {props.value}<br /></>;
+const StatisticsLine = (props) => (<>
+  <td>{props.text}</td>
+  <td>{props.value}</td>
+</>);
 
 const Statistics = ({ good, bad, neutral }) => {
 
@@ -28,12 +31,28 @@ const Statistics = ({ good, bad, neutral }) => {
     result = (<><p>No feedback given</p></>);
   else
     result = (<>
-      <StatisticsLine text={TEXT_GOOD} value={good} />
-      <StatisticsLine text={TEXT_NEUTRAL} value={neutral} />
-      <StatisticsLine text={TEXT_BAD} value={bad} />
-      <StatisticsLine text={TEXT_ALL} value={all} />
-      <StatisticsLine text={TEXT_AVERAGE} value={average} />
-      <StatisticsLine text={TEXT_POSITIVE} value={positive + " %"} />
+      <table>
+        <tbody>
+          <tr>
+            <StatisticsLine text={TEXT_GOOD} value={good} />
+          </tr>
+          <tr>
+            <StatisticsLine text={TEXT_NEUTRAL} value={neutral} />
+          </tr>
+          <tr>
+            <StatisticsLine text={TEXT_BAD} value={bad} />
+          </tr>
+          <tr>
+            <StatisticsLine text={TEXT_ALL} value={all} />
+          </tr>
+          <tr>
+            <StatisticsLine text={TEXT_AVERAGE} value={average} />
+          </tr>
+          <tr>
+            <StatisticsLine text={TEXT_POSITIVE} value={positive + " %"} />
+          </tr>
+        </tbody>
+      </table>
     </>);
 
   return result;
