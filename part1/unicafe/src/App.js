@@ -22,14 +22,19 @@ const Statistics = ({ good, bad, neutral }) => {
   average = all === 0 ? 0 : (good - bad) / all;
   positive = all === 0 ? 0 : 100 * good / all;
 
-  let result = (<>
-    <Display text={TEXT_GOOD} value={good} />
-    <Display text={TEXT_NEUTRAL} value={neutral} />
-    <Display text={TEXT_BAD} value={bad} />
-    <Display text={TEXT_ALL} value={all} />
-    <Display text={TEXT_AVERAGE} value={average} />
-    <Display text={TEXT_POSITIVE} value={positive + " %"} />
-  </>);
+  let result;
+
+  if (all === 0)
+    result = (<><p>No feedback given</p></>);
+  else
+    result = (<>
+      <Display text={TEXT_GOOD} value={good} />
+      <Display text={TEXT_NEUTRAL} value={neutral} />
+      <Display text={TEXT_BAD} value={bad} />
+      <Display text={TEXT_ALL} value={all} />
+      <Display text={TEXT_AVERAGE} value={average} />
+      <Display text={TEXT_POSITIVE} value={positive + " %"} />
+    </>);
 
   return result;
 };
