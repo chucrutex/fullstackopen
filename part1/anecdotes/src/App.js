@@ -15,12 +15,28 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [votes, setVoted] = useState(new Array(anecdotes.length).fill(0));
 
-  const handleClick = () => {
+  const handleNextAnecdote = () => {
+
     console.log("pressed button");
     let randomInd = getRandomArbitrary(0, anecdotes.length);
+
     console.log("generated random number [" + randomInd + "]");
     setSelected(randomInd);
+
+  };
+
+  const handleVote = () => {
+
+    let updatedVotes = [...votes];
+    console.log("votes so far [", updatedVotes, "]");
+
+
+    updatedVotes[selected] += 1;
+    setVoted(updatedVotes);
+    console.log("votes after computing vote  for anecdote [", selected, "]: [", updatedVotes, "]");
+
   };
 
   const getRandomArbitrary = (min, max) => Math.trunc(Math.random() * (max - min) + min);
@@ -28,7 +44,7 @@ const App = () => {
   return (
     <div>
       <p>{anecdotes[selected]}</p>
-      <p><Button text="next anecdote" handler={() => handleClick()} /></p>
+      <p><Button text="vote" handler={() => handleVote()} /> <Button text="next anecdote" handler={() => handleNextAnecdote()} /></p>
     </div>
   );
 };
