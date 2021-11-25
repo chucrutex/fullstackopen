@@ -32,20 +32,29 @@ const App = () => {
     let updatedVotes = [...votes];
     console.log("votes so far [", updatedVotes, "]");
 
-
     updatedVotes[selected] += 1;
     setVoted(updatedVotes);
     console.log("votes after computing vote  for anecdote [", selected, "]: [", updatedVotes, "]");
+
+    // let maxInd = updatedVotes.findIndex(value => value === Math.max(...updatedVotes));
+
+    console.log("Index of the most voted anecdote [", maxInd, "]");
 
   };
 
   const getRandomArbitrary = (min, max) => Math.trunc(Math.random() * (max - min) + min);
 
+  let maxInd = votes.findIndex(value => value === Math.max(...votes));
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
       <p><Button text="vote" handler={() => handleVote()} /> <Button text="next anecdote" handler={() => handleNextAnecdote()} /></p>
+      <h1>Anecdote with the most votes</h1>
+      <p>{anecdotes[maxInd]}</p>
+      <p>has {votes[maxInd]} votes</p>
     </div>
   );
 };
