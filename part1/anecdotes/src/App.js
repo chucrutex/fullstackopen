@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
+const Button = ({ text, handler }) => (<><button onClick={handler}>{text}</button></>);
+
 const App = () => {
-  
+
   const anecdotes = [
     "If it hurts, do it more often",
     "Adding manpower to a late software project makes it later!",
@@ -11,12 +13,22 @@ const App = () => {
     "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
     "Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients"
   ];
-   
+
   const [selected, setSelected] = useState(0);
+
+  const handleClick = () => {
+    console.log("pressed button");
+    let randomInd = getRandomArbitrary(0, anecdotes.length);
+    console.log("generated random number [" + randomInd + "]");
+    setSelected(randomInd);
+  };
+
+  const getRandomArbitrary = (min, max) => Math.trunc(Math.random() * (max - min) + min);
 
   return (
     <div>
-      {anecdotes[selected]}
+      <p>{anecdotes[selected]}</p>
+      <p><Button text="next anecdote" handler={() => handleClick()} /></p>
     </div>
   );
 };
