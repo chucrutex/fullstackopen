@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 
 // dados que serão exibidos no curso
-const course = {
+const courses = [{
   id: 1,
   name: "Half Stack application development",
   parts: [{
@@ -24,6 +24,18 @@ const course = {
     exercises: 11,
     id: 4
   }]
-};
+}, {
+  id: 2,
+  name: "Node.js",
+  parts: [{
+    name: "Routing",
+    exercises: 3,
+    id: 1
+  }, {
+    name: "Middlewares",
+    exercises: 7,
+    id: 2
+  }]
+}];
 
-ReactDOM.render(<App course={course} />, document.getElementById("root"))
+ReactDOM.render(<App courses={courses} />, document.getElementById("root"))
