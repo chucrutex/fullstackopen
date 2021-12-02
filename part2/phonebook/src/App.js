@@ -19,10 +19,20 @@ const App = () => {
     // se chegou aqui, é pq o nome da pessoa foi preenchido
     console.log("%cConteúdo da variável event", "color: #007acc;", event);
 
-    let newPerson = { name: newName };
+    let newNameTrimmed = newName.trim();
 
-    // adiciona o nome ao array
-    setPersons(persons.concat(newPerson));
+    if (persons.find(person => person.name === newNameTrimmed))
+      alert(newNameTrimmed + " is already added to phonebook");
+    else {
+
+      // adiciona o nome ao array
+      let newPerson = { name: newNameTrimmed };
+      setPersons(persons.concat(newPerson));
+
+      // limpa o campo do nome
+      setNewName("");
+
+    }
 
   };
 
@@ -37,7 +47,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <form>
         <div>
-          name: <input onChange={handleChangeNewName} />
+          name: <input onChange={handleChangeNewName} value={newName} />
         </div>
         <div>
           <button type="submit" onClick={handleNewNameClick}>add</button>
